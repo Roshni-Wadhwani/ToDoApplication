@@ -33,46 +33,43 @@ export default function ViewPage() {
     };
 
     const showNotification = () => {
-      if (Notification.permission === "granted") {
+      if ("Notification" in window && Notification.permission === "granted") {
         new Notification("Alarm", {
           body: "It's time for your reminder!",
         });
-        playNotificationSound();
-      } else {
-        if (Notification.permission !== "denied") {
-          Notification.requestPermission().then((permission) => {
-            if (permission === "granted") {
-              new Notification("Alarm", {
-                body: "It's time for your reminder!",
-              });
-              playNotificationSound();
-            }
-          });
-        }
       }
     };
 
-    const playNotificationSound = () => {
-      const audio = new Audio(soundFile);
-      audio.play();
-    };
-
-    axios
-      .get("http://localhost:8000/todo/")
-      .then((response) => {
-        const data = response.data;
-        setData(data);
-        data.forEach((item) => {
-          if (item.setReminder) {
-            setAlarm(item.due);
+    const requestNotificationPermission = () => {
+      if ("Notification" in window && Notification.permission !== "denied") {
+        Notification.requestPermission().then((permission) => {
+          if (permission === "granted") {
+            showNotification();
           }
         });
-      })
-      .catch((error) => {
-        console.log("Error fetching data", error);
-      });
-  }, []);
+      }
+    };
 
+    const fetchData = () => {
+      axios
+        .get("http://localhost:8000/todo/")
+        .then((response) => {
+          const data = response.data;
+          setData(data);
+          data.forEach((item) => {
+            if (item.setReminder) {
+              setAlarm(item.due);
+            }
+          });
+        })
+        .catch((error) => {
+          console.log("Error fetching data", error);
+        });
+    };
+
+    fetchData();
+    requestNotificationPermission();
+  }, []);
   return (
     <>
       <div className="container mx-5 my-5">
