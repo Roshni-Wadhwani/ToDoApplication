@@ -44,17 +44,6 @@ export default function DeletePage() {
         alert("error deleting item", error);
       });
   };
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/todo/")
-      .then((response) => {
-        const data = response.data;
-        setData(data);
-      })
-      .catch((error) => {
-        console.log("Error fetching data", error);
-      });
-  }, []);
 
   return (
     <>
