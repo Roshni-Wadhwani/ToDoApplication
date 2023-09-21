@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import dayjs from "dayjs";
@@ -13,7 +13,7 @@ import videoFile3 from "../video/swings.mp4";
 import videoFile4 from "../video/react_textUtils.mp4";
 import "../../node_modules/video-react/dist/video-react.css";
 
-export const UserForm = (props) => {
+export const UserForm = () => {
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [cmplted, setCmplted] = useState(false);
@@ -21,12 +21,6 @@ export const UserForm = (props) => {
   const [due, setDue] = useState(new Date());
   const today = dayjs();
   const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
-
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  // useEffect(() => {
-  //   setIsModalOpen(true);
-  // }, []);
 
   const videos = [videoFile1, videoFile2, videoFile3, videoFile4];
 
@@ -45,9 +39,6 @@ export const UserForm = (props) => {
       alert("Error saving item");
     }
   };
-  // const closeModal = () => {
-  //   setIsModalOpen(false);
-  // };
 
   const handleVideoEnd = () => {
     setCurrentVideoIndex((prevIndex) => (prevIndex + 1) % videos.length);
@@ -133,36 +124,6 @@ export const UserForm = (props) => {
             width: "20%",
             marginLeft: "10px",
           }}>
-          {/* {isModalOpen && (
-            <div
-              style={{
-                position: "fixed",
-                top: 0,
-                left: 0,
-                right: 0,
-                bottom: 0,
-                background: "rgba(0, 0, 0, 0.6)",
-                display: "flex",
-                alignItems: "right",
-                justifyContent: "right",
-                zIndex: "9999",
-              }}>
-              <div
-                style={{
-                  position: "relative",
-                  maxWidth: "80%",
-                  maxHeight: "80%",
-                }}>
-                <button
-                  style={{
-                    position: "absolute",
-                    top: 0,
-                    right: 0,
-                    zIndex: 9999,
-                  }}
-                  onClick={closeModal}>
-                  Close
-                </button> */}
           <Player
             playsInline
             autoPlay
@@ -173,9 +134,6 @@ export const UserForm = (props) => {
             height={400}
           />
         </div>
-        {/* </div> */}
-        {/* )} */}
-        {/* </div> */}
       </div>
     </>
   );

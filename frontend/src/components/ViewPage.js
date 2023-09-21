@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import soundFile from "../music/sound1.mp3";
 
 export default function ViewPage() {
   const [viewData, setData] = useState([]);

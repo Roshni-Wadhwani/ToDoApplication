@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import Button from "./Button";
 import bgrndImg from "../img/background.jpeg";
 export default function MainPage() {
   return (
@@ -18,26 +18,10 @@ export default function MainPage() {
             ToDo Application
           </h1>
           <div className="d-grid gap-3 col-3 row-2 mx-auto">
-            <Link to="/add">
-              <button type="button" className="w-100 btn-lg">
-                Add
-              </button>
-            </Link>
-            <Link to="/view">
-              <button type="button" className="w-100 btn-lg">
-                View
-              </button>
-            </Link>
-            <Link to="/delete">
-              <button type="button" className="w-100 btn-lg">
-                Delete
-              </button>
-            </Link>
-            <Link to="/update">
-              <button type="button" className="w-100 btn-lg">
-                Update
-              </button>
-            </Link>
+            <Button to="/add" text="Add" />
+            <Button to="/view" text="View" />
+            <Button to="/delete" text="Delete" />
+            <Button to="/update" text="Update" />
           </div>
         </div>
       </div>
